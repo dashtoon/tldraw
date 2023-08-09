@@ -29,6 +29,7 @@ export type TLDrawShapeProps = {
 	fill: TLFillType
 	dash: TLDashType
 	size: TLSizeType
+	strokeWidth: number
 	segments: TLDrawShapeSegment[]
 	isComplete: boolean
 	isClosed: boolean
@@ -46,6 +47,7 @@ export const drawShapeValidator: T.Validator<TLDrawShape> = createShapeValidator
 		fill: fillValidator,
 		dash: dashValidator,
 		size: sizeValidator,
+		strokeWidth: T.number,
 		segments: T.arrayOf(drawShapeSegmentValidator),
 		isComplete: T.boolean,
 		isClosed: T.boolean,

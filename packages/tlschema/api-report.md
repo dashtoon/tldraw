@@ -508,7 +508,7 @@ export const TL_SIZE_TYPES: Set<"l" | "m" | "s" | "xl">;
 export const TL_SPLINE_TYPES: Set<"cubic" | "line">;
 
 // @public (undocumented)
-export const TL_STYLE_TYPES: Set<"align" | "arrowheadEnd" | "arrowheadStart" | "color" | "dash" | "fill" | "font" | "geo" | "icon" | "labelColor" | "size" | "spline" | "verticalAlign">;
+export const TL_STYLE_TYPES: Set<"align" | "arrowheadEnd" | "arrowheadStart" | "color" | "dash" | "fill" | "font" | "geo" | "icon" | "labelColor" | "size" | "spline" | "strokeWidth" | "verticalAlign">;
 
 // @public (undocumented)
 export interface TLAlignStyle extends TLBaseStyle {

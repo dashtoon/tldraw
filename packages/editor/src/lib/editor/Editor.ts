@@ -381,7 +381,6 @@ export class Editor extends EventEmitter<TLEventMap> {
 
 	/** @internal */
 	private _updateDepth = 0
-
 	/** @public */
 	externalContentManager = new ExternalContentManager(this)
 
@@ -661,7 +660,15 @@ export class Editor extends EventEmitter<TLEventMap> {
 			this._isChangingStyleTimeout = setTimeout(() => (this.isChangingStyle = false), 2000)
 		}
 	}
+	/** @internal */
+	private _DrawShapeStrokeWidth = atom<number>('DrawShapeStrokeWidth', 0 as any)
 
+	get DrawShapeStrokeWidth() {
+		return this._DrawShapeStrokeWidth.value
+	}
+	set DrawShapeStrokeWidth(v) {
+		this._DrawShapeStrokeWidth.set(v)
+	}
 	/**
 	 * A cache of page transforms.
 	 *
@@ -3375,8 +3382,9 @@ export class Editor extends EventEmitter<TLEventMap> {
 	 * @param id - The id of the size to get.
 	 * @public
 	 */
-	getStrokeWidth(id: TLSizeStyle['id']): number {
-		return this.sizes[id]
+	getStrokeWidth(id: TLSizeStyle['id'], customStrokeSize = -1): number {
+		if (customStrokeSize == -1) return this.sizes[id]
+		else return customStrokeSize
 	}
 
 	/* ------------------- Statechart ------------------- */
@@ -7890,7 +7898,14 @@ export class Editor extends EventEmitter<TLEventMap> {
 
 		return this
 	}
+	// setStrokeWidth(strokeWidth: number, ephemeral = false, squashing = false) {
+	// 	this.history.batch(() => {
 
+	// 		this.updateInstanceState({propsForNextShape:{} }, ephemeral, squashing)
+	// 	})
+
+	// 	return this
+	// }
 	/**
 	 * Set the current props (generally styles).
 	 *
@@ -8004,6 +8019,8 @@ export class Editor extends EventEmitter<TLEventMap> {
 				}
 			}
 
+			// eslint-disable-next-line no-console
+			console.log('TL SHAPEPROP da!!')
 			this.updateInstanceState(
 				{
 					propsForNextShape: setPropsForNextShape(this.instanceState.propsForNextShape, {

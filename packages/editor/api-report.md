@@ -438,6 +438,9 @@ export class Editor extends EventEmitter<TLEventMap> {
     distributeShapes(operation: 'horizontal' | 'vertical', ids?: TLShapeId[]): this;
     get documentSettings(): TLDocument;
     // (undocumented)
+    get DrawShapeStrokeWidth(): number;
+    set DrawShapeStrokeWidth(v: number);
+    // (undocumented)
     duplicatePage(id?: TLPageId, createId?: TLPageId): void;
     duplicateShapes(ids?: TLShapeId[], offset?: VecLike): this;
     get editingId(): null | TLShapeId;
@@ -518,7 +521,7 @@ export class Editor extends EventEmitter<TLEventMap> {
     getShapeUtil<S extends TLUnknownShape>(shape: S | TLShapePartial<S>): ShapeUtil<S>;
     getSortedChildIds(parentId: TLParentId): TLShapeId[];
     getStateDescendant(path: string): StateNode | undefined;
-    getStrokeWidth(id: TLSizeStyle['id']): number;
+    getStrokeWidth(id: TLSizeStyle['id'], customStrokeSize?: number): number;
     // (undocumented)
     getSvg(ids?: TLShapeId[], opts?: Partial<{
         scale: number;

@@ -36,6 +36,7 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
 			fill: 'none',
 			dash: 'draw',
 			size: 'm',
+			strokeWidth: 1,
 			isComplete: false,
 			isClosed: false,
 			isPen: false,
@@ -118,9 +119,10 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
 
 	render(shape: TLDrawShape) {
 		const forceSolid = useForceSolid()
-		const strokeWidth = this.editor.getStrokeWidth(shape.props.size)
+		const strokeWidth = shape.props.strokeWidth
 		const allPointsFromSegments = getPointsFromSegments(shape.props.segments)
-
+		// eslint-disable-next-line no-console
+		console.log('rendering.... shape: ', shape, ' and strokeWidth = ', strokeWidth)
 		const showAsComplete = shape.props.isComplete || last(shape.props.segments)?.type === 'straight'
 
 		let sw = strokeWidth

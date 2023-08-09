@@ -69,6 +69,19 @@ function useStyleChangeCallback() {
 		[editor]
 	)
 }
+function useHandleDrawShapeStrokeWidth() {
+	const editor = useEditor()
+
+	return React.useCallback(
+		(value: number, squashing: boolean) => {
+			editor.batch(() => {
+				editor.setProp('strokeWidth', value, false, squashing)
+				editor.isChangingStyle = true
+			})
+		},
+		[editor]
+	)
+}
 
 const tldrawSupportedOpacities = [0.1, 0.25, 0.5, 0.75, 1] as const
 
@@ -83,7 +96,15 @@ function CommonStylePickerSet({
 	const msg = useTranslation()
 
 	const handleValueChange = useStyleChangeCallback()
-
+	const handleDrawShapeStrokeWidth = useHandleDrawShapeStrokeWidth()
+	// const handleDrawShapeStrokeWidth=React.useCallback(
+	// 	(value:number)=>{
+	// 		// eslint-disable-next-line no-console
+	// 		console.log('value is ',value);
+	// 		editor.setStrokeWidth(value)
+	// 		editor.isChangingStyle = true
+	// 	},[editor]
+	// )
 	const handleOpacityValueChange = React.useCallback(
 		(value: number, ephemeral: boolean) => {
 			const item = tldrawSupportedOpacities[value]
@@ -172,6 +193,18 @@ function CommonStylePickerSet({
 							onValueChange={handleValueChange}
 						/>
 					)}
+					<div>
+						Stroke Width
+						<Slider
+							data-testid="style.opacity"
+							value={editor.DrawShapeStrokeWidth}
+							label={opacity ? `opacity-style.${opacity}` : 'style-panel.mixed'}
+							onValueChange={handleDrawShapeStrokeWidth}
+							steps={30}
+							title={msg('style-panel.opacity')}
+						/>
+						{/* <input type="number" value={editor.DrawShapeStrokeWidth} onChange={handleDrawShapeStrokeWidth}></input> */}
+					</div>
 				</div>
 			)}
 		</>
