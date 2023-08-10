@@ -83,6 +83,21 @@ function useHandleDrawShapeStrokeWidth() {
 	)
 }
 
+function useHandleColorHex() {
+	const editor = useEditor()
+
+	return React.useCallback(
+		(event: any) => {
+			editor.DrawShapeColorHex = event.target.value
+			editor.batch(() => {
+				editor.setProp('colorHex', event.target.value, false, false)
+				editor.isChangingStyle = true
+			})
+		},
+		[editor]
+	)
+}
+
 const tldrawSupportedOpacities = [0.1, 0.25, 0.5, 0.75, 1] as const
 
 function CommonStylePickerSet({
@@ -97,14 +112,7 @@ function CommonStylePickerSet({
 
 	const handleValueChange = useStyleChangeCallback()
 	const handleDrawShapeStrokeWidth = useHandleDrawShapeStrokeWidth()
-	// const handleDrawShapeStrokeWidth=React.useCallback(
-	// 	(value:number)=>{
-	// 		// eslint-disable-next-line no-console
-	// 		console.log('value is ',value);
-	// 		editor.setStrokeWidth(value)
-	// 		editor.isChangingStyle = true
-	// 	},[editor]
-	// )
+	const handleColorHex = useHandleColorHex()
 	const handleOpacityValueChange = React.useCallback(
 		(value: number, ephemeral: boolean) => {
 			const item = tldrawSupportedOpacities[value]
@@ -114,7 +122,7 @@ function CommonStylePickerSet({
 		[editor]
 	)
 
-	const { color, fill, dash, size } = props
+	const { color, fill, dash, size, colorHex } = props
 
 	if (
 		color === undefined &&
@@ -203,7 +211,16 @@ function CommonStylePickerSet({
 							steps={30}
 							title={msg('style-panel.opacity')}
 						/>
-						{/* <input type="number" value={editor.DrawShapeStrokeWidth} onChange={handleDrawShapeStrokeWidth}></input> */}
+					</div>
+					<div>
+						Color
+						<input
+							type="color"
+							value={colorHex?.toString()}
+							onChange={handleColorHex}
+							placeholder="Enter color HEXCODE"
+							style={{ marginLeft: '5px' }}
+						/>
 					</div>
 				</div>
 			)}

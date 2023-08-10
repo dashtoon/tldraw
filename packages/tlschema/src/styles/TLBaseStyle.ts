@@ -3,6 +3,7 @@ import { SetValue } from '../util-types'
 /** @public */
 export const TL_STYLE_TYPES = new Set([
 	'color',
+	'colorHex',
 	'labelColor',
 	'dash',
 	'fill',

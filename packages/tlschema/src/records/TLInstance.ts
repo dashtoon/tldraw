@@ -66,6 +66,7 @@ export const instanceTypeValidator: T.Validator<TLInstance> = T.model(
 		opacityForNextShape: opacityValidator,
 		propsForNextShape: T.object({
 			color: colorValidator,
+			colorHex: T.string,
 			labelColor: colorValidator,
 			dash: dashValidator,
 			fill: fillValidator,
@@ -296,6 +297,7 @@ export const InstanceRecordType = createRecordType<TLInstance>('instance', {
 		opacityForNextShape: 1,
 		propsForNextShape: {
 			color: 'black',
+			colorHex: '#000000',
 			labelColor: 'black',
 			dash: 'draw',
 			fill: 'none',

@@ -438,6 +438,9 @@ export class Editor extends EventEmitter<TLEventMap> {
     distributeShapes(operation: 'horizontal' | 'vertical', ids?: TLShapeId[]): this;
     get documentSettings(): TLDocument;
     // (undocumented)
+    get DrawShapeColorHex(): string;
+    set DrawShapeColorHex(v: string);
+    // (undocumented)
     get DrawShapeStrokeWidth(): number;
     set DrawShapeStrokeWidth(v: number);
     // (undocumented)

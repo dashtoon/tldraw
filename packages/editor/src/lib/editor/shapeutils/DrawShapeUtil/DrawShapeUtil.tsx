@@ -33,6 +33,7 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
 		return {
 			segments: [],
 			color: 'black',
+			colorHex: '#000000',
 			fill: 'none',
 			dash: 'draw',
 			size: 'm',
@@ -121,8 +122,6 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
 		const forceSolid = useForceSolid()
 		const strokeWidth = shape.props.strokeWidth
 		const allPointsFromSegments = getPointsFromSegments(shape.props.segments)
-		// eslint-disable-next-line no-console
-		console.log('rendering.... shape: ', shape, ' and strokeWidth = ', strokeWidth)
 		const showAsComplete = shape.props.isComplete || last(shape.props.segments)?.type === 'straight'
 
 		let sw = strokeWidth
@@ -157,7 +156,7 @@ export class DrawShapeUtil extends ShapeUtil<TLDrawShape> {
 					<path
 						d={getSvgPathFromStroke(strokeOutlinePoints, true)}
 						strokeLinecap="round"
-						fill="currentColor"
+						fill={shape.props.colorHex}
 					/>
 				</SVGContainer>
 			)

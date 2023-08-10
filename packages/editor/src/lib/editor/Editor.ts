@@ -669,6 +669,15 @@ export class Editor extends EventEmitter<TLEventMap> {
 	set DrawShapeStrokeWidth(v) {
 		this._DrawShapeStrokeWidth.set(v)
 	}
+	/** @internal */
+	private _DrawShapeColorHex = atom<string>('DrawShapeColorHex', '#000000' as any)
+
+	get DrawShapeColorHex() {
+		return this._DrawShapeColorHex.value
+	}
+	set DrawShapeColorHex(v) {
+		this._DrawShapeColorHex.set(v)
+	}
 	/**
 	 * A cache of page transforms.
 	 *
@@ -8018,9 +8027,6 @@ export class Editor extends EventEmitter<TLEventMap> {
 					}
 				}
 			}
-
-			// eslint-disable-next-line no-console
-			console.log('TL SHAPEPROP da!!')
 			this.updateInstanceState(
 				{
 					propsForNextShape: setPropsForNextShape(this.instanceState.propsForNextShape, {
